@@ -3002,11 +3002,15 @@ a {
   justify-content: space-between;
   padding: 40px;
   height: 100vh;
+  max-height: 100dvh;
   max-width: 715px;
   width: 715px;
   background-color: #fff;
   -webkit-transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
   transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .M_HistoryInsideItem:is(.active) {
