@@ -165,10 +165,6 @@ body {
   max-width: 100vw;
 }
 
-a {
-  color: inherit !important;
-}
-
 div {
   font-family:
     TT Firs Neue,
@@ -3746,5 +3742,404 @@ video {
     line-height: 20px !important;
     font-weight: 400;
     letter-spacing: -0.64px;
+  }
+}
+
+/* наши проекты (ported from kuvekino) */
+
+.project {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  overflow: hidden;
+  cursor: pointer;
+
+  .text {
+    @apply text-white;
+  }
+
+  &:is(.kuvekino) {
+    background-color: var(--kuvekino-color);
+    background-image: url("https://optim.tildacdn.com/tild6663-3335-4437-b235-376639343334/-/resize/660x/-/format/webp/kuvekino.jpg.webp");
+    background-size: cover;
+    background-position: center;
+
+    .project_color {
+      background-color: var(--kuvekino-color);
+    }
+  }
+
+  &:is(.senkino) {
+    background-color: var(--senkino-color);
+    background-image: url(https://optim.tildacdn.com/tild3765-3966-4432-a165-613131316163/-/resize/660x/-/format/webp/senkino.jpg.webp);
+    background-size: cover;
+    background-position: center;
+
+    .project_color {
+      background-color: var(--senkino-color);
+    }
+  }
+
+  &:is(.balashiha) {
+    background-color: var(--balashiha-color);
+    background-image: url(https://optim.tildacdn.com/tild6536-3033-4263-a639-306438313765/-/resize/660x/-/format/webp/balashiha.jpg.webp);
+    background-size: cover;
+    background-position: center;
+
+    .project_color {
+      background-color: var(--balashiha-color);
+    }
+  }
+
+  &:is(.sokolovo) {
+    background-color: var(--sokolovo-color);
+  background-image: url(https://optim.tildacdn.com/tild6638-3536-4566-b930-313465643233/-/resize/660x/-/format/webp/sokolovo.jpg.webp);
+    background-size: cover;
+    background-position: center;
+
+    .project_color {
+      background-color: var(--sokolovo-color);
+    }
+  }
+
+  &:is(.tokarevo) {
+    background-color: var(--tokarevo-color);
+    background-image: url(https://optim.tildacdn.com/tild6633-3830-4631-b062-653561363634/-/resize/660x/-/format/webp/tokarevo.jpg.webp);
+    background-size: cover;
+    background-position: center;
+
+    .project_color {
+      background-color: var(--tokarevo-color);
+    }
+  }
+
+  &:is(.butovo) {
+    background-color: var(--butovo-color);
+    background-image: url(https://optim.tildacdn.com/tild6633-6133-4934-b362-376264343162/-/resize/660x/-/format/webp/butovo.jpg.webp);
+    background-size: cover;
+    background-position: center;
+
+    .project_color {
+      background-color: var(--butovo-color);
+    }
+  }
+}
+
+.project_color {
+  transition: background-color 0.3s;
+}
+
+@media (max-width:1023px) {
+  .project.kuvekino {
+    background-image: url(https://optim.tildacdn.com/tild6264-3739-4832-b832-386262616436/-/resize/621x/-/format/webp/kuvekino_mobile.jpg.webp)
+  }
+
+  .project.senkino {
+    background-image: url(https://optim.tildacdn.com/tild6162-3931-4539-a333-313766633963/-/resize/621x/-/format/webp/senkino_mobile.jpg.webp)
+  }
+
+  .project:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.00) 46.21%);
+    }
+
+  .project.balashiha {
+    background-image: url(https://optim.tildacdn.com/tild3639-6137-4635-a135-363865616135/-/resize/621x/-/format/webp/balashiha_mobile.jpg.webp)
+  }
+
+  .project.sokolovo {
+    background-image: url(https://optim.tildacdn.com/tild3533-3464-4337-a331-373739303237/-/resize/621x/-/format/webp/sokolovo_mobile.jpg.webp)
+  }
+
+  .project.tokarevo {
+    background-image: url(https://optim.tildacdn.com/tild3665-6634-4064-b437-353365376330/-/resize/621x/-/format/webp/tokarevo_mobile.jpg.webp)
+  }
+
+  .project.butovo {
+    background-image: url(https://optim.tildacdn.com/tild3461-3835-4136-b365-663263643333/-/resize/621x/-/format/webp/butovo_mobile.jpg.webp)
+  }
+}
+
+
+/* .project:hover { */
+
+.project {
+  p.data {
+    /* display: none; */
+    opacity: 0;
+  }
+
+  .content {
+    position: absolute;
+  }
+}
+
+/* Hover animation only on desktop (>=1024px) */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+.project:hover {
+  .growing {
+    position: relative;
+    height: 382px;
+    transition: 0.3s ease-in-out;
+    opacity: 1;
+  }
+
+  .growing.kuvekino {
+    background-color: var(--kuvekino-color);
+  }
+
+  .growing.balashiha {
+    background-color: var(--balashiha-color);
+  }
+
+  .growing.senkino {
+    background-color: var(--senkino-color);
+  }
+
+  .growing.sokolovo {
+    background-color: var(--sokolovo-color);
+  }
+
+  .growing.tokarevo {
+    background-color: var(--tokarevo-color);
+  }
+
+  .growing.butovo {
+    background-color: var(--butovo-color);
+  }
+
+  .plus {
+    background-color: white;
+    transition: background-color 0.3s;
+  }
+
+  p.data {
+    display: flex;
+    animation: goingUp 0.5s forwards;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    animation-delay: 0.1s;
+
+    &:nth-child(1) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.05s;
+    }
+  }
+
+  .content {
+    transition: 0.3s;
+    /* animation: goingUp 0.3s ease-in-out forwards;
+    animation-delay: 0.2s; */
+  }
+}
+}
+
+@keyframes goingUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.tag {
+  width: fit-content;
+  height: 24px;
+  border-radius: 1000px;
+
+  border: 1px solid white;
+
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.tagWrap {
+  max-width: 332px;
+  position: absolute;
+  left: 40px;
+  top: 40px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Our Projects: Swiper mode (all breakpoints) */
+#OurProjects .swiper {
+  width: 100%;
+}
+
+/* Override legacy absolute + fit-content track so Swiper can control layout */
+#OurProjects [data-track].swiper-wrapper {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* On mobile we want exactly 1 card per screen */
+@media (max-width: 1023px) {
+  #OurProjects .swiper-slide {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #OurProjects .swiper-slide {
+    width: 440px !important;
+    max-width: 440px !important;
+  }
+}
+
+
+.growing {
+  height: 100px;
+  transition: all .3s ease-in-out;
+}
+
+/* Mobile/Touch: open state via JS (.is-open) */
+.project.is-open .growing {
+  opacity: 1;
+  height: 382px !important;
+  transition: all .3s ease-in-out;
+  position: relative;
+}
+
+.project.is-open .plus img:first-child,
+.project.is-open .plus img:nth-child(2) {
+  transition: transform .3s ease-in-out;
+  transform: translateY(-100%);
+}
+
+.project.is-open .growing.kuvekino {
+  background-color: var(--kuvekino-color);
+}
+.project.is-open .growing.balashiha {
+  background-color: var(--balashiha-color);
+}
+.project.is-open .growing.senkino {
+  background-color: var(--senkino-color);
+}
+.project.is-open .growing.sokolovo {
+  background-color: var(--sokolovo-color);
+}
+.project.is-open .growing.tokarevo {
+  background-color: var(--tokarevo-color);
+}
+.project.is-open .growing.butovo {
+  background-color: var(--butovo-color);
+}
+
+.project.is-open .plus {
+  background-color: #fff;
+  transition: background-color .3s;
+}
+
+.project.is-open p.data {
+  animation: .5s ease-in-out .1s forwards goingUp;
+  display: flex;
+}
+.project.is-open p.data:first-child {
+  animation-delay: .15s;
+}
+.project.is-open p.data:nth-child(2) {
+  animation-delay: .1s;
+}
+.project.is-open p.data:nth-child(3) {
+  animation-delay: 50ms;
+}
+
+.project.is-open .content {
+  pointer-events: auto;
+  transition: all .3s;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .project:hover .growing {
+    opacity: 1;
+    height: 382px;
+    transition: all .3s ease-in-out;
+    position: relative
+  }
+
+  .project:hover .plus img:first-child,
+  .project:hover .plus img:nth-child(2) {
+    transition: transform .3s ease-in-out;
+    transform: translateY(-100%)
+  }
+
+  .project:hover .growing.kuvekino {
+    background-color: var(--kuvekino-color)
+  }
+
+  .project:hover .growing.balashiha {
+    background-color: var(--balashiha-color)
+  }
+
+  .project:hover .growing.senkino {
+    background-color: var(--senkino-color)
+  }
+
+  .project:hover .growing.sokolovo {
+    background-color: var(--sokolovo-color)
+  }
+
+  .project:hover .growing.tokarevo {
+    background-color: var(--tokarevo-color)
+  }
+
+  .project:hover .growing.butovo {
+    background-color: var(--butovo-color)
+  }
+
+  .project:hover .plus {
+    background-color: #fff;
+    transition: background-color .3s
+  }
+
+  .project:hover p.data {
+    animation: .5s ease-in-out .1s forwards goingUp;
+    display: flex
+  }
+
+  .project:hover p.data:first-child {
+    animation-delay: .15s
+  }
+
+  .project:hover p.data:nth-child(2) {
+    animation-delay: .1s
+  }
+
+  .project:hover p.data:nth-child(3) {
+    animation-delay: 50ms
+  }
+
+  .project:hover .content {
+    pointer-events: auto;
+    transition: all .3s
   }
 }
