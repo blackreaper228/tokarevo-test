@@ -180,61 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial call to set the initial visibility
   // updateVisibility();
 
-  // Mobile Cards swipe and arrows
-  const cardContainer = document.getElementById('U_CardsMobile');
-  const activeCounterElement = document.querySelector('.U_Active');
-  if (cardContainer && activeCounterElement && cardContainer.children.length) {
-    const cardWidth = cardContainer.children[0].offsetWidth;
-    let activeIndex = 0;
-    let startX = 0;
-
-    // Function to update card position and counter display
-    function updateCardDisplay() {
-      const translateValue = -activeIndex * (cardWidth + 2); // Adjust for gap
-      cardContainer.style.left = `${translateValue}px`;
-      activeCounterElement.textContent = activeIndex + 1; // Displaying count starting from 1
-    }
-
-    // Left arrow click
-    document.querySelector('.U_LeftMobile')?.addEventListener('click', () => {
-      if (activeIndex > 0) {
-        activeIndex--;
-        updateCardDisplay();
-      }
-    });
-
-    // Right arrow click
-    document.querySelector('.U_RightMobile')?.addEventListener('click', () => {
-      if (activeIndex < cardContainer.children.length - 1) {
-        activeIndex++;
-        updateCardDisplay();
-      }
-    });
-
-    // Swipe start
-    cardContainer.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    // Swipe end
-    cardContainer.addEventListener('touchend', (e) => {
-      const endX = e.changedTouches[0].clientX;
-      const difference = endX - startX;
-      const threshold = 50; // Swipe threshold
-
-      if (difference > threshold && activeIndex > 0) {
-        // Swipe right
-        activeIndex--;
-      } else if (difference < -threshold && activeIndex < cardContainer.children.length - 1) {
-        // Swipe left
-        activeIndex++;
-      }
-      updateCardDisplay();
-    });
-
-    // Initial display update
-    updateCardDisplay();
-  }
+  // Mobile advantages: Swiper via swiperMobileCarousels.js ([data-slider] on .U_MobileAdvantages)
 
   // Event listener for "Show more" button
   showMoreButton?.addEventListener('click', () => {

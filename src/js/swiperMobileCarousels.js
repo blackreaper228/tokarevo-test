@@ -37,9 +37,53 @@ function pickVisibleNav(sliderRoot) {
   return { prevEl, nextEl };
 }
 
+function getSwiperMediaQuery(sliderRoot) {
+  const belowAttr = sliderRoot.getAttribute('data-swiper-below');
+  if (belowAttr == null || belowAttr === '') return null;
+  const below = parseInt(belowAttr, 10);
+  if (!Number.isFinite(below) || below <= 0) return null;
+  return window.matchMedia(`(max-width: ${below - 1}px)`);
+}
+
+function shouldRunSwiper(sliderRoot) {
+  const mq = getSwiperMediaQuery(sliderRoot);
+  if (mq) return mq.matches;
+  return true;
+}
+
+function teardownSwiperStructure(sliderRoot) {
+  const track = sliderRoot.querySelector('[data-track]');
+  if (!track) return;
+  const container = track.parentElement;
+  if (!container) return;
+
+  const stripSwiperClasses = (el) => {
+    Array.from(el.classList)
+      .filter((c) => c.startsWith('swiper-'))
+      .forEach((c) => el.classList.remove(c));
+  };
+
+  stripSwiperClasses(container);
+  stripSwiperClasses(track);
+  Array.from(track.querySelectorAll('[data-slide]')).forEach(stripSwiperClasses);
+
+  container.style.cssText = '';
+  track.style.cssText = '';
+  Array.from(track.querySelectorAll('[data-slide]')).forEach((slide) => {
+    slide.style.width = '';
+    slide.style.marginRight = '';
+    slide.style.height = '';
+  });
+}
+
 function initOne(sliderRoot) {
   if (sliderRoot.getAttribute('data-mobile-carousel') !== 'true') return null;
   if ((sliderRoot.getAttribute('data-mode') || '').toLowerCase() !== 'translate') return null;
+
+  if (!shouldRunSwiper(sliderRoot)) {
+    destroyOne(sliderRoot);
+    return null;
+  }
 
   const Swiper = getSwiper();
   if (!Swiper) return null;
@@ -57,20 +101,30 @@ function initOne(sliderRoot) {
   // Prevent double init.
   if (container.__swiperInstance) return container.__swiperInstance;
 
+  const spaceAttr = sliderRoot.getAttribute('data-space-between');
+  const fixedSpaceBetween =
+    spaceAttr != null && spaceAttr !== '' && Number.isFinite(parseInt(spaceAttr, 10))
+      ? parseInt(spaceAttr, 10)
+      : null;
+
   const instance = new Swiper(container, {
     slidesPerView: 'auto',
-    spaceBetween: 0,
+    spaceBetween: fixedSpaceBetween ?? 0,
     loop: false,
+    slidesOffsetAfter: 0,
     speed: 380,
     resistanceRatio: 0.85,
     followFinger: true,
     threshold: 5,
     grabCursor: true,
     simulateTouch: true,
-    breakpoints: {
-      0: { spaceBetween: 0 },
-      1024: { spaceBetween: 2 },
-    },
+    breakpoints:
+      fixedSpaceBetween != null
+        ? undefined
+        : {
+            0: { spaceBetween: 0 },
+            1024: { spaceBetween: 2 },
+          },
     preventInteractionOnTransition: false,
     navigation: prevEl && nextEl ? { prevEl, nextEl } : undefined,
     on: {
@@ -93,18 +147,48 @@ function destroyOne(sliderRoot) {
   const track = sliderRoot.querySelector('[data-track]');
   const container = track?.parentElement;
   const inst = container?.__swiperInstance;
-  if (inst && typeof inst.destroy === 'function') inst.destroy(true, false);
+  if (inst && typeof inst.destroy === 'function') inst.destroy(true, true);
   if (container) container.__swiperInstance = null;
+  teardownSwiperStructure(sliderRoot);
+}
+
+function bindSwiperMediaListeners() {
+  const roots = Array.from(document.querySelectorAll('[data-slider][data-mobile-carousel="true"]'));
+  roots.forEach((sliderRoot) => {
+    const mq = getSwiperMediaQuery(sliderRoot);
+    if (!mq || sliderRoot.__swiperMqBound) return;
+    sliderRoot.__swiperMqBound = true;
+    mq.addEventListener('change', () => {
+      if (mq.matches) initOne(sliderRoot);
+      else destroyOne(sliderRoot);
+    });
+  });
 }
 
 function initAll() {
   const roots = Array.from(document.querySelectorAll('[data-slider][data-mobile-carousel="true"]'));
   roots.forEach((r) => initOne(r));
+  bindSwiperMediaListeners();
 }
+
+/** Re-init one carousel (e.g. after dynamic HTML from adminka.js). */
+function initKuvekinoSwiperCarousel(root) {
+  if (root) {
+    destroyOne(root);
+    return initOne(root);
+  }
+  initAll();
+}
+
+window.initKuvekinoSwiperCarousel = initKuvekinoSwiperCarousel;
 
 function refreshOnResize() {
   const roots = Array.from(document.querySelectorAll('[data-slider][data-mobile-carousel="true"]'));
   roots.forEach((r) => {
+    if (!shouldRunSwiper(r)) {
+      destroyOne(r);
+      return;
+    }
     const track = r.querySelector('[data-track]');
     const container = track?.parentElement;
     const inst = container?.__swiperInstance;
@@ -121,4 +205,3 @@ if (document.readyState === 'loading') {
 
 window.addEventListener('resize', refreshOnResize);
 window.addEventListener('orientationchange', refreshOnResize);
-

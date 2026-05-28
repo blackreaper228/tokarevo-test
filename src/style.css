@@ -1,30 +1,30 @@
 @import 'tailwindcss';
 
 :root {
-    --black: #000000;
-    --pikBlack: #181818;
-    --white: #ffffff;
+  --black: #000000;
+  --pikBlack: #181818;
+  --white: #ffffff;
 
-    --lightGrey: #f7f7f7;
-    --grey: #888888;
+  --lightGrey: #f7f7f7;
+  --grey: #888888;
 
-    /* stroke */
-    --stroke-light: #dddddd;
-    --stroke-dark: #3a3a3a;
+  /* stroke */
+  --stroke-light: #dddddd;
+  --stroke-dark: #3a3a3a;
 
-    /* park */
-    --senkino-color: #9ca8af;
-    --balashiha-color: #4f98a3;
-    --kuvekino-color: #bdb7aa;
-    --sokolovo-color: #a65b61;
-    --tokarevo-color: #8a7f8e;
-    --butovo-color: #949e8c;
+  /* park */
+  --senkino-color: #9ca8af;
+  --balashiha-color: #4f98a3;
+  --kuvekino-color: #bdb7aa;
+  --sokolovo-color: #a65b61;
+  --tokarevo-color: #8a7f8e;
+  --butovo-color: #949e8c;
 
-    /* переменные Матвея */
-    --color-primary: #000;
-    --secondary-light: #f7f7f7;
+  /* переменные Матвея */
+  --color-primary: #000;
+  --secondary-light: #f7f7f7;
 
-    --parametr-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --parametr-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -284,6 +284,9 @@ a {
 }
 
 .O_Offers {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
   align-items: center;
   gap: 40px;
@@ -293,7 +296,16 @@ a {
   padding: 40px 0;
 }
 
-.O_Offers,
+.W_OffersTitleRow {
+  width: 100%;
+  max-width: var(--main-width);
+  box-sizing: border-box;
+}
+
+.W_OffersSwitchers {
+  display: none;
+}
+
 .W_BurgerPhone {
   display: flex;
   flex-direction: column;
@@ -1121,7 +1133,7 @@ a {
 
 .W_Offer {
   flex-direction: column;
-  gap: 24px;
+  gap: 48px;
   padding: 48px 0;
   justify-content: space-between;
 }
@@ -1140,8 +1152,9 @@ a {
 }
 
 .A_OfferTitle {
-  min-height: 84px;
+  min-height: 86px;
   font-size: 28px;
+  line-height: 1;
 }
 
 .W_OfferPoints {
@@ -1166,6 +1179,7 @@ a {
 .A_OfferMain {
   color: #373936;
   font-size: 28px;
+  line-height: 1;
 }
 
 .W_MobileNavigation {
@@ -1191,37 +1205,6 @@ a {
   .W_Switchers {
     width: -moz-fit-content;
     width: fit-content;
-  }
-
-  .U_LeftOffer {
-    cursor: pointer;
-    border: 1px solid #131313;
-    border-radius: 100px;
-    height: 35px;
-    max-height: 35px;
-    max-width: 35px;
-    width: 35px;
-  }
-
-  .W_Offer {
-    min-width: 100%;
-  }
-
-  .W_MobileNavigation {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .U_RightOffer {
-    cursor: pointer;
-    border: 1px solid #131313;
-    border-radius: 100px;
-    height: 35px;
-    max-height: 35px;
-    max-width: 35px;
-    width: 35px;
   }
 }
 
@@ -1439,7 +1422,7 @@ a {
   gap: 0;
 }
 
-#U_Cards {
+#U_Cards:not(.swiper-wrapper) {
   max-width: none;
   position: relative;
   transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
@@ -2133,7 +2116,7 @@ a {
     width: 100%;
   }
 
-  .W_MobileCards {
+  .W_MobileCards:not(.swiper-wrapper) {
     display: flex;
     flex-direction: row;
     gap: 2px;
@@ -2709,8 +2692,8 @@ a {
   height: 622px;
   padding: 24px;
   padding-left: calc((100vw - 1360px) / 2);
-  border-bottom: 1px solid #18181815;
-  border-top: 1px solid #18181815;
+  border-bottom: 1px solid rgba(24, 24, 24, 0.08235);
+  border-top: 1px solid rgba(24, 24, 24, 0.08235);
 }
 
 .U_Floating {
@@ -2721,9 +2704,11 @@ a {
 .A_OfferButton {
   width: 100%;
   height: 47px;
+  min-height: 47px;
   text-align: center;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #181818;
+  color: #181818 !important;
   border-radius: 48px;
   display: flex;
   align-items: center;
@@ -2749,8 +2734,8 @@ a {
   height: 622px;
   padding: 24px;
   padding-right: calc((100vw - 1360px) / 2);
-  border-bottom: 1px solid #18181815;
-  border-top: 1px solid #18181815;
+  border-bottom: 1px solid rgba(24, 24, 24, 0.08235);
+  border-top: 1px solid rgba(24, 24, 24, 0.08235);
 }
 
 .U_BestOffer {
@@ -2783,6 +2768,10 @@ a {
 }
 
 @media (max-width: 1439px) {
+  .W_Offer {
+    padding: 24px;
+  }
+
   .W_OfferLeft {
     height: 552px;
     padding-left: calc((100vw - 944px) / 2);
@@ -2796,53 +2785,109 @@ a {
   .U_BestOffer {
     height: 552px;
   }
+
+  .A_OfferTitle {
+    font-size: 22px;
+    min-height: 60px;
+  }
 }
 
 @media (max-width: 1023px) {
-  .W_OfferLeft {
-    padding-left: 24px;
+  .O_Offers {
+    padding-bottom: 0;
+    overflow-x: hidden;
   }
 
-  .U_Floating {
+  .W_OfferPoints {
+    gap: 24px;
+  }
+
+  .W_Offers:not(.swiper-wrapper) {
+    transition: all 0.3s ease-in-out;
+  }
+
+  #Offers[data-slider] .W_Offer {
+    min-width: 100vw;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .W_OffersTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
     padding: 0 24px;
+    max-width: none;
+  }
+
+  #Offers .W_OffersTitleRow .U_Floating {
+    padding: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .W_OffersSwitchers {
+    display: flex;
+  }
+
+  #Offers[data-slider] .W_OfferLeft,
+  #Offers[data-slider] .W_OfferRight,
+  #Offers[data-slider] .U_BestOffer {
+    padding-left: 24px;
+    padding-right: 24px;
+    height: 500px;
+    padding-bottom: 48px;
+  }
+
+  .W_OfferLeft {
+    padding-left: 24px;
+    border-bottom: none;
   }
 
   .W_OfferRight {
     padding-right: 24px;
+    border-bottom: none;
   }
 
-  .W_MobileNavigation {
-    padding: 0 24px;
-  }
-
-  .U_BestOffer {
-  }
-
-  .W_Offers {
+  .W_Offers:not(.swiper-wrapper) {
     display: flex;
     flex-wrap: nowrap;
     transition: transform 0.4s ease;
-    /* плавный сдвиг */
+  }
+
+  .W_Offer {
+    min-width: 100%;
+  }
+
+  .W_MobileNavigation {
+    display: none;
+  }
+
+  #Offers .U_LeftOffer {
+    width: 38px;
+    max-width: 38px;
+    height: 38px;
+    max-height: 38px;
+    border-radius: 100px;
+    border: 1px solid #131313;
+  }
+
+  #Offers .U_RightOffer {
+    width: 38px;
+    max-width: 38px;
+    height: 38px;
+    max-height: 38px;
+    border-radius: 100px;
+    border: 1px solid #131313;
   }
 }
 
 @media (max-width: 768px) {
   .Q_OfferDivHorizontal {
-    /* вертикальная линия-разделитель */
     display: none;
-    /* скрываем – иначе даёт +1 px и «уезжает» слайд */
-  }
-
-  .W_Offers {
-    display: flex;
-    flex-wrap: nowrap;
-    transition: transform 0.4s ease;
-    /* плавный сдвиг */
-  }
-
-  .W_Offer {
-    flex: 0 0 100%;
-    /* каждый слайд = полная ширина вьюпорта */
   }
 }
 
@@ -2854,17 +2899,14 @@ a {
 
   .W_Offer.U_BestOffer {
     order: -1;
-    /* This will make it appear first */
   }
 
   .W_Offer.W_OfferLeft {
     order: 1;
-    /* This will make it appear second */
   }
 
   .W_Offer.W_OfferRight {
     order: 2;
-    /* This will make it appear third */
   }
 }
 
@@ -3248,7 +3290,6 @@ a {
 }
 
 .W_RowHistory {
-  min-width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3256,17 +3297,18 @@ a {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
+}
+
+.W_RowHistory:not(.swiper-wrapper) {
+  min-width: 100vw;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  border-top: 1px solid rgba(24, 24, 24, 0.15);
-  border-bottom: 1px solid rgba(24, 24, 24, 0.15);
   -webkit-transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
   transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .W_RowHistoryG {
-  min-width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3274,11 +3316,15 @@ a {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
+  border-top: 1px solid rgba(24, 24, 24, 0.15);
+  border-bottom: 1px solid rgba(24, 24, 24, 0.15);
+}
+
+.W_RowHistoryG:not(.swiper-wrapper) {
+  min-width: 100vw;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  border-top: 1px solid rgba(24, 24, 24, 0.15);
-  border-bottom: 1px solid rgba(24, 24, 24, 0.15);
   -webkit-transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
   transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -3449,10 +3495,10 @@ a {
 }
 
 @media all and (max-width: 1024px) {
-.A_HistoryDescriptionText {
-        font-size: 14px;
-        max-width: 100%;
-    }
+  .A_HistoryDescriptionText {
+    font-size: 14px;
+    max-width: 100%;
+  }
 }
 
 .W_Section {
@@ -3761,7 +3807,7 @@ video {
 
   &:is(.kuvekino) {
     background-color: var(--kuvekino-color);
-    background-image: url("https://optim.tildacdn.com/tild6663-3335-4437-b235-376639343334/-/resize/660x/-/format/webp/kuvekino.jpg.webp");
+    background-image: url('https://optim.tildacdn.com/tild6663-3335-4437-b235-376639343334/-/resize/660x/-/format/webp/kuvekino.jpg.webp');
     background-size: cover;
     background-position: center;
 
@@ -3794,7 +3840,7 @@ video {
 
   &:is(.sokolovo) {
     background-color: var(--sokolovo-color);
-  background-image: url(https://optim.tildacdn.com/tild6638-3536-4566-b930-313465643233/-/resize/660x/-/format/webp/sokolovo.jpg.webp);
+    background-image: url(https://optim.tildacdn.com/tild6638-3536-4566-b930-313465643233/-/resize/660x/-/format/webp/sokolovo.jpg.webp);
     background-size: cover;
     background-position: center;
 
@@ -3830,13 +3876,13 @@ video {
   transition: background-color 0.3s;
 }
 
-@media (max-width:1023px) {
+@media (max-width: 1023px) {
   .project.kuvekino {
-    background-image: url(https://optim.tildacdn.com/tild6264-3739-4832-b832-386262616436/-/resize/621x/-/format/webp/kuvekino_mobile.jpg.webp)
+    background-image: url(https://optim.tildacdn.com/tild6264-3739-4832-b832-386262616436/-/resize/621x/-/format/webp/kuvekino_mobile.jpg.webp);
   }
 
   .project.senkino {
-    background-image: url(https://optim.tildacdn.com/tild6162-3931-4539-a333-313766633963/-/resize/621x/-/format/webp/senkino_mobile.jpg.webp)
+    background-image: url(https://optim.tildacdn.com/tild6162-3931-4539-a333-313766633963/-/resize/621x/-/format/webp/senkino_mobile.jpg.webp);
   }
 
   .project:after {
@@ -3847,26 +3893,25 @@ video {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.00) 46.21%);
-    }
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 46.21%);
+  }
 
   .project.balashiha {
-    background-image: url(https://optim.tildacdn.com/tild3639-6137-4635-a135-363865616135/-/resize/621x/-/format/webp/balashiha_mobile.jpg.webp)
+    background-image: url(https://optim.tildacdn.com/tild3639-6137-4635-a135-363865616135/-/resize/621x/-/format/webp/balashiha_mobile.jpg.webp);
   }
 
   .project.sokolovo {
-    background-image: url(https://optim.tildacdn.com/tild3533-3464-4337-a331-373739303237/-/resize/621x/-/format/webp/sokolovo_mobile.jpg.webp)
+    background-image: url(https://optim.tildacdn.com/tild3533-3464-4337-a331-373739303237/-/resize/621x/-/format/webp/sokolovo_mobile.jpg.webp);
   }
 
   .project.tokarevo {
-    background-image: url(https://optim.tildacdn.com/tild3665-6634-4064-b437-353365376330/-/resize/621x/-/format/webp/tokarevo_mobile.jpg.webp)
+    background-image: url(https://optim.tildacdn.com/tild3665-6634-4064-b437-353365376330/-/resize/621x/-/format/webp/tokarevo_mobile.jpg.webp);
   }
 
   .project.butovo {
-    background-image: url(https://optim.tildacdn.com/tild3461-3835-4136-b365-663263643333/-/resize/621x/-/format/webp/butovo_mobile.jpg.webp)
+    background-image: url(https://optim.tildacdn.com/tild3461-3835-4136-b365-663263643333/-/resize/621x/-/format/webp/butovo_mobile.jpg.webp);
   }
 }
-
 
 /* .project:hover { */
 
@@ -3883,68 +3928,68 @@ video {
 
 /* Hover animation only on desktop (>=1024px) */
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-.project:hover {
-  .growing {
-    position: relative;
-    height: 382px;
-    transition: 0.3s ease-in-out;
-    opacity: 1;
-  }
-
-  .growing.kuvekino {
-    background-color: var(--kuvekino-color);
-  }
-
-  .growing.balashiha {
-    background-color: var(--balashiha-color);
-  }
-
-  .growing.senkino {
-    background-color: var(--senkino-color);
-  }
-
-  .growing.sokolovo {
-    background-color: var(--sokolovo-color);
-  }
-
-  .growing.tokarevo {
-    background-color: var(--tokarevo-color);
-  }
-
-  .growing.butovo {
-    background-color: var(--butovo-color);
-  }
-
-  .plus {
-    background-color: white;
-    transition: background-color 0.3s;
-  }
-
-  p.data {
-    display: flex;
-    animation: goingUp 0.5s forwards;
-    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
-    animation-delay: 0.1s;
-
-    &:nth-child(1) {
-      animation-delay: 0.15s;
+  .project:hover {
+    .growing {
+      position: relative;
+      height: 382px;
+      transition: 0.3s ease-in-out;
+      opacity: 1;
     }
 
-    &:nth-child(2) {
+    .growing.kuvekino {
+      background-color: var(--kuvekino-color);
+    }
+
+    .growing.balashiha {
+      background-color: var(--balashiha-color);
+    }
+
+    .growing.senkino {
+      background-color: var(--senkino-color);
+    }
+
+    .growing.sokolovo {
+      background-color: var(--sokolovo-color);
+    }
+
+    .growing.tokarevo {
+      background-color: var(--tokarevo-color);
+    }
+
+    .growing.butovo {
+      background-color: var(--butovo-color);
+    }
+
+    .plus {
+      background-color: white;
+      transition: background-color 0.3s;
+    }
+
+    p.data {
+      display: flex;
+      animation: goingUp 0.5s forwards;
+      animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
       animation-delay: 0.1s;
+
+      &:nth-child(1) {
+        animation-delay: 0.15s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0.05s;
+      }
     }
 
-    &:nth-child(3) {
-      animation-delay: 0.05s;
-    }
-  }
-
-  .content {
-    transition: 0.3s;
-    /* animation: goingUp 0.3s ease-in-out forwards;
+    .content {
+      transition: 0.3s;
+      /* animation: goingUp 0.3s ease-in-out forwards;
     animation-delay: 0.2s; */
+    }
   }
-}
 }
 
 @keyframes goingUp {
@@ -3985,6 +4030,166 @@ video {
   flex-wrap: wrap;
 }
 
+/* Swiper CDN sets .swiper-slide { width: 100% } — reset unless a block below sets width */
+[data-slider][data-mobile-carousel='true'] .swiper-slide {
+  width: auto;
+}
+
+/* Трек без Swiper часто имел `transition: all 1s` — это ломает transform у .swiper-wrapper */
+[data-slider] [data-track].swiper-wrapper {
+  transition-property: transform !important;
+}
+
+/* Offers: desktop — без Swiper, три колонки */
+@media (min-width: 1024px) {
+  #Offers[data-slider] .W_Offers,
+  #Offers[data-slider] [data-track].swiper-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  #Offers[data-slider] .W_Offer,
+  #Offers[data-slider] .W_Offer.swiper-slide {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  #Offers[data-slider] .W_Offer.U_BestOffer,
+  #Offers[data-slider] .W_Offer.W_OfferLeft,
+  #Offers[data-slider] .W_Offer.W_OfferRight {
+    order: unset;
+  }
+}
+
+/* Offers: mobile Swiper (< 1024px) */
+@media all and (max-width: 1023px) {
+  #Offers[data-slider] .swiper {
+    width: 100%;
+  }
+
+  #Offers[data-slider] [data-track].swiper-wrapper {
+    position: relative !important;
+    left: auto !important;
+    transform: translate3d(0, 0, 0);
+    width: max-content !important;
+    max-width: none !important;
+    min-width: 0 !important;
+  }
+
+  #Offers[data-slider] .swiper-slide {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  #Offers[data-slider] .swiper-wrapper {
+    transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1) !important;
+  }
+}
+
+/* Преимущества: desktop card 440px */
+@media (min-width: 1024px) {
+  .U_MobileHideCards[data-slider] .swiper-slide {
+    width: 440px !important;
+    max-width: 440px !important;
+    min-width: 440px !important;
+  }
+}
+
+.U_MobileHideCards[data-slider] .swiper {
+  width: 100%;
+}
+
+.U_MobileHideCards[data-slider] [data-track].swiper-wrapper {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  width: max-content !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+.U_MobileHideCards[data-slider] .swiper-slide {
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* Mobile advantages: title + arrows */
+.U_MobileAdvantagesTitleRow .A_SectionTitle {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.U_MobileAdvantages[data-slider] .swiper {
+  width: 100%;
+}
+
+.U_MobileAdvantages[data-slider] [data-track].swiper-wrapper {
+  position: relative !important;
+  left: auto !important;
+  transition-property: transform !important;
+  width: max-content !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+.U_MobileAdvantages[data-slider] .swiper-slide {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.U_MobileAdvantages .U_MobileRow {
+  gap: 0;
+}
+
+.U_MobileAdvantages .W_MobileCards {
+  gap: 0;
+}
+
+[data-slider][data-mobile-carousel='true'] .swiper-wrapper {
+  transition-timing-function: cubic-bezier(0.77, 0, 0.175, 1) !important;
+}
+
+/* Ход стройки: Swiper (all breakpoints) */
+#O_History[data-slider] .swiper {
+  width: 100%;
+}
+
+#O_History [data-track].swiper-wrapper {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 1023px) {
+  #O_History[data-slider] .swiper-slide {
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #O_History[data-slider] .swiper-slide {
+    width: 480px !important;
+    max-width: 480px !important;
+  }
+}
+
 /* Our Projects: Swiper mode (all breakpoints) */
 #OurProjects .swiper {
   width: 100%;
@@ -4015,23 +4220,22 @@ video {
   }
 }
 
-
 .growing {
   height: 100px;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Mobile/Touch: open state via JS (.is-open) */
 .project.is-open .growing {
   opacity: 1;
   height: 382px !important;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   position: relative;
 }
 
 .project.is-open .plus img:first-child,
 .project.is-open .plus img:nth-child(2) {
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   transform: translateY(-100%);
 }
 
@@ -4056,18 +4260,18 @@ video {
 
 .project.is-open .plus {
   background-color: #fff;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
 }
 
 .project.is-open p.data {
-  animation: .5s ease-in-out .1s forwards goingUp;
+  animation: 0.5s ease-in-out 0.1s forwards goingUp;
   display: flex;
 }
 .project.is-open p.data:first-child {
-  animation-delay: .15s;
+  animation-delay: 0.15s;
 }
 .project.is-open p.data:nth-child(2) {
-  animation-delay: .1s;
+  animation-delay: 0.1s;
 }
 .project.is-open p.data:nth-child(3) {
   animation-delay: 50ms;
@@ -4075,71 +4279,71 @@ video {
 
 .project.is-open .content {
   pointer-events: auto;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 @media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
   .project:hover .growing {
     opacity: 1;
     height: 382px;
-    transition: all .3s ease-in-out;
-    position: relative
+    transition: all 0.3s ease-in-out;
+    position: relative;
   }
 
   .project:hover .plus img:first-child,
   .project:hover .plus img:nth-child(2) {
-    transition: transform .3s ease-in-out;
-    transform: translateY(-100%)
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-100%);
   }
 
   .project:hover .growing.kuvekino {
-    background-color: var(--kuvekino-color)
+    background-color: var(--kuvekino-color);
   }
 
   .project:hover .growing.balashiha {
-    background-color: var(--balashiha-color)
+    background-color: var(--balashiha-color);
   }
 
   .project:hover .growing.senkino {
-    background-color: var(--senkino-color)
+    background-color: var(--senkino-color);
   }
 
   .project:hover .growing.sokolovo {
-    background-color: var(--sokolovo-color)
+    background-color: var(--sokolovo-color);
   }
 
   .project:hover .growing.tokarevo {
-    background-color: var(--tokarevo-color)
+    background-color: var(--tokarevo-color);
   }
 
   .project:hover .growing.butovo {
-    background-color: var(--butovo-color)
+    background-color: var(--butovo-color);
   }
 
   .project:hover .plus {
     background-color: #fff;
-    transition: background-color .3s
+    transition: background-color 0.3s;
   }
 
   .project:hover p.data {
-    animation: .5s ease-in-out .1s forwards goingUp;
-    display: flex
+    animation: 0.5s ease-in-out 0.1s forwards goingUp;
+    display: flex;
   }
 
   .project:hover p.data:first-child {
-    animation-delay: .15s
+    animation-delay: 0.15s;
   }
 
   .project:hover p.data:nth-child(2) {
-    animation-delay: .1s
+    animation-delay: 0.1s;
   }
 
   .project:hover p.data:nth-child(3) {
-    animation-delay: 50ms
+    animation-delay: 50ms;
   }
 
   .project:hover .content {
     pointer-events: auto;
-    transition: all .3s
+    transition: all 0.3s;
   }
 }

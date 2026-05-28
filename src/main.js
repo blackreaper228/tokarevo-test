@@ -1,10 +1,10 @@
 import './style.css';
 
+import './js/swiperMobileCarousels.js';
 import './js/history.js';
 import './js/adminka.js';
 import './js/adminka_lotov.js';
 import './js/accordeon.js';
-import './js/swiperMobileCarousels.js';
 import './js/cards.js';
 import './js/scrollToTop.js';
 

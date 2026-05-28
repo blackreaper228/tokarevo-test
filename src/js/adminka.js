@@ -8,6 +8,20 @@
 (function () {
   'use strict';
 
+  function refreshHistorySwiper(root) {
+    if (!root) return;
+    const run = () => {
+      if (typeof window.initKuvekinoSwiperCarousel === 'function') {
+        window.initKuvekinoSwiperCarousel(root);
+        return true;
+      }
+      return false;
+    };
+    if (!run()) {
+      window.addEventListener('load', run, { once: true });
+    }
+  }
+
   let historyModalScrollLockY = 0;
   let historyModalScrollLocked = false;
 
@@ -286,7 +300,7 @@
     const historyItems = data
       .map(
         (item) => `
-      <div class="M_HistoryItem" id="${item.id}">
+      <div class="M_HistoryItem" id="${item.id}" data-slide>
         <img class="A_HistoryItemImage" src="${item.mainImage}" alt="">
         <div class="W_HistoryItemRow">
           <p class="A_HistoryItemText">
@@ -305,20 +319,23 @@
       <div class="W_RowHistoryTitleButton U_Padding">
         <h2 class="A_SectionTitle">Ход строительства</h2>
         <div class="W_RowHistoryButton">
-          <div class="A_Arrow U_LeftHistory">
+          <div class="A_Arrow U_LeftHistory" data-prev>
             <img class="Q_ImageIcon" src="https://optim.tildacdn.com/tild6266-6439-4136-b839-316239636237/-/resize/700x/-/format/webp/arrow-Left.png" alt="">
           </div>
-          <div class="A_Arrow U_RightHistory">
+          <div class="A_Arrow U_RightHistory" data-next>
             <img class="Q_ImageIcon" src="https://optim.tildacdn.com/tild3638-3031-4436-b861-373431666664/-/resize/700x/-/format/webp/arrow-Right.png" alt="">
           </div>
         </div>
       </div>
-      <div class="W_RowHistory" style="transform: translateX(0px);">
-        ${historyItems}
+      <div class="relative w-full overflow-hidden border-y border-[var(--stroke-light)]">
+        <div class="W_RowHistory" data-track>
+          ${historyItems}
+        </div>
       </div>
     `;
 
     container.innerHTML = historyHTML;
+    refreshHistorySwiper(container);
     console.log(`✅ HTML успешно установлен для ${containerId}`);
   }
 
@@ -392,71 +409,8 @@
     }
   }
 
-  // Навигация по истории строительства
+  // Навигация по истории строительства (карусель — Swiper в swiperMobileCarousels.js)
   function initHistoryNavigation() {
-    // Desktop навигация по истории
-    const historyRow = document.querySelector('.W_RowHistory');
-    const leftArrow = document.querySelector('.U_LeftHistory');
-    const rightArrow = document.querySelector('.U_RightHistory');
-
-    if (historyRow && leftArrow && rightArrow) {
-      let currentPosition = 0;
-      historyRow.style.transform = `translateX(${currentPosition}px)`;
-
-      // Функция для получения правильной ширины элемента с отступами
-      function getItemWidth() {
-        const firstItem = historyRow.children[0];
-        if (!firstItem) return 300;
-
-        const itemStyle = window.getComputedStyle(firstItem);
-        const itemWidth = firstItem.offsetWidth;
-        const marginLeft = parseInt(itemStyle.marginLeft, 10) || 0;
-        const marginRight = parseInt(itemStyle.marginRight, 10) || 0;
-
-        return itemWidth + marginLeft + marginRight;
-      }
-
-      // Функция для получения максимального сдвига
-      function getMaxScroll() {
-        const containerWidth = historyRow.parentElement.offsetWidth;
-        const totalWidth = historyRow.scrollWidth;
-        return -(totalWidth - containerWidth);
-      }
-
-      leftArrow.addEventListener('click', function () {
-        const itemWidth = getItemWidth();
-        const newPosition = currentPosition + itemWidth;
-
-        // Проверяем, не превышаем ли начальную позицию
-        if (newPosition <= 0) {
-          currentPosition = newPosition;
-          historyRow.style.transform = `translateX(${currentPosition}px)`;
-          console.log(`⬅️ История: сдвиг влево на ${itemWidth}px, позиция: ${currentPosition}px`);
-        } else {
-          currentPosition = 0;
-          historyRow.style.transform = `translateX(${currentPosition}px)`;
-          console.log(`⬅️ История: возврат в начало, позиция: ${currentPosition}px`);
-        }
-      });
-
-      rightArrow.addEventListener('click', function () {
-        const itemWidth = getItemWidth();
-        const maxScroll = getMaxScroll();
-        const newPosition = currentPosition - itemWidth;
-
-        // Проверяем, не превышаем ли максимальный сдвиг
-        if (newPosition >= maxScroll) {
-          currentPosition = newPosition;
-          historyRow.style.transform = `translateX(${currentPosition}px)`;
-          console.log(`➡️ История: сдвиг вправо на ${itemWidth}px, позиция: ${currentPosition}px`);
-        } else {
-          currentPosition = maxScroll;
-          historyRow.style.transform = `translateX(${currentPosition}px)`;
-          console.log(`➡️ История: максимальный сдвиг, позиция: ${currentPosition}px`);
-        }
-      });
-    }
-
     // Клики по элементам истории для переключения детального вида
     const historyItems = document.querySelectorAll('.M_HistoryItem');
     const historyDetailsItems = document.querySelectorAll('.M_HistoryInsideItem');
